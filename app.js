@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
-
+app.use(express.static('public'));
 // MongoDB 연결
 mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -42,14 +42,14 @@ app.post('/new', async (req, res) => {
 // 글 수정 폼 렌더링
 app.get('/edit/:id', async (req, res) => {
   const blogPost = await BlogPost.findById(req.params.id);
-  res.render('edit', { blogPost });
+  res.json(blogPost);
 });
 
 // 글 수정 요청 처리
 app.post('/edit/:id', async (req, res) => {
   const { title, content } = req.body;
   await BlogPost.findByIdAndUpdate(req.params.id, { title, content });
-  res.redirect('/');
+  res.json({ message: 'Changes saved successfully!' });
 });
 
 app.listen(port, () => {
