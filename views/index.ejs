@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Blog Posts</h1>
+  <ul>
+    <% blogPosts.forEach(post => { %>
+      <li><strong><%= post.title %></strong>: <%= post.content %></li>
+    <% }); %>
+  </ul>
+  <a href="/new">Write a new post</a>
+</body>
+</html>
